@@ -1,0 +1,1 @@
+add wave -noupdate -r /tb2/*

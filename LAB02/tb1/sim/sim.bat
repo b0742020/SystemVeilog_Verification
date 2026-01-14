@@ -1,0 +1,1 @@
+"C:\questasim64_10.6c\win64\questasim.exe" -do sim.do
