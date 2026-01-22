@@ -15,36 +15,32 @@ endinterface
 module chnl_initiator(chnl_intf intf);
   string name;
   int idle_cycles = 1;
-  
   function automatic void set_idle_cycles(int n);
     idle_cycles = n;
   endfunction
-  
   function automatic void set_name(string s);
     name = s;
   endfunction
-  
   task automatic chnl_write(input logic[31:0] data);
     @(posedge intf.clk);
     // USER TODO 1.1
     // Please use the clocking drv_ck of chnl_intf to drive data
     intf.drv_ck.ch_valid <= 1;
     intf.drv_ck.ch_data <= data;
-    wait(intf.drv_ck.ch_ready === 'b1);
+    @(negedge intf.clk);
+    wait(intf.ch_ready === 'b1);
     $display("%t channel initiator [%s] sent data %x", $time, name, data);
     // USER TODO 1.2
     // Apply variable idle_cycles and decide how many idle cycles to be
     // inserted between two sequential data
     repeat(idle_cycles) chnl_idle();
   endtask
-
   task automatic chnl_idle();
     @(posedge intf.clk);
     // USER TODO 1.1
     // Please use the clocking drv_ck of chnl_intf to drive data
     intf.drv_ck.ch_valid <= 0;
     intf.drv_ck.ch_data <= 0;
-  
   endtask
 endmodule
 
@@ -65,7 +61,7 @@ module chnl_generator;
   endfunction
 endmodule
 
-module tb1;
+module tb1_ref;
   logic         clk;
   logic         rstn;
   logic [31:0]  mcdt_data;
@@ -146,7 +142,7 @@ module tb1;
     end
     chnl2_init.chnl_idle(); 
   end
-  
+
   chnl_intf chnl0_if(.*);
   chnl_intf chnl1_if(.*);
   chnl_intf chnl2_if(.*);
