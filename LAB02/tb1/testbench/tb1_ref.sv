@@ -15,12 +15,15 @@ endinterface
 module chnl_initiator(chnl_intf intf);
   string name;
   int idle_cycles = 1;
+  
   function automatic void set_idle_cycles(int n);
     idle_cycles = n;
   endfunction
+  
   function automatic void set_name(string s);
     name = s;
   endfunction
+
   task automatic chnl_write(input logic[31:0] data);
     @(posedge intf.clk);
     // USER TODO 1.1
