@@ -1,0 +1,187 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dE:/Proj/LAB02/tb1/sim
+T_opt
+!s110 1769521387
+VKbc@^;SlJP3eWI_QXQ8bg2
+04 3 4 work tb1 fast 0
+=1-1c8341ca9720-6978c0eb-1c1-845c
+o-quiet -auto_acc_if_foreign -work work -L work +acc
+Z1 tCvgOpt 0
+n@_opt
+OL;O;10.6c;65
+varbiter
+Z2 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z3 !s110 1769521386
+!i10b 1
+!s100 KfVDaVdSjhGe5AnYCi_lL3
+Ic6f6gzAc5[1VSMcS:BOlV0
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+!s105 arbiter_v_unit
+S1
+R0
+w1768227542
+8../source/arbiter.v
+F../source/arbiter.v
+L0 5
+Z5 OL;L;10.6c;65
+r1
+!s85 0
+31
+Z6 !s108 1769521386.000000
+Z7 !s107 ../source/slave_fifo.v|../source/mcdt.v|../source/arbiter.v|
+Z8 !s90 -reportprogress|300|-sv|-f|rtl_v.f|
+!i113 0
+Z9 o-sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+vchnl_generator
+R2
+R3
+!i10b 1
+!s100 H8dcLdJehVf85MamC4C1i0
+II=b8n[J0Ge15d7DH=3E9O2
+R4
+Z10 !s105 tb1_sv_unit
+S1
+R0
+Z11 w1769521246
+Z12 8../testbench/tb1.sv
+Z13 F../testbench/tb1.sv
+L0 51
+R5
+r1
+!s85 0
+31
+Z14 !s108 1769521385.000000
+Z15 !s107 ../testbench/tb1.sv|
+Z16 !s90 -reportprogress|300|-sv|-f|rtl_sv.f|
+!i113 0
+R9
+R1
+vchnl_initiator
+R2
+R3
+!i10b 1
+!s100 e`BW[SWY4Sz=nWDNP;?a>2
+Ii86kc7V8@N]m;UVIlc2UP2
+R4
+R10
+S1
+R0
+R11
+R12
+R13
+L0 15
+R5
+r1
+!s85 0
+31
+R14
+R15
+R16
+!i113 0
+R9
+R1
+Ychnl_intf
+R2
+R3
+!i10b 1
+!s100 nf85GKmd>4M4NgM=kB9[k1
+I2jT6TSD<>L90P48ZL2zJO1
+R4
+R10
+S1
+R0
+R11
+R12
+R13
+L0 3
+R5
+r1
+!s85 0
+31
+R14
+R15
+R16
+!i113 0
+R9
+R1
+vmcdt
+R2
+R3
+!i10b 1
+!s100 j_5LGf[Gk=46f?LE>]XJH3
+IHzdmiLXEcnnRYRE>S`cff0
+R4
+!s105 mcdt_v_unit
+S1
+R0
+Z17 w1745167494
+8../source/mcdt.v
+F../source/mcdt.v
+L0 5
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 0
+R9
+R1
+vslave_fifo
+R2
+R3
+!i10b 1
+!s100 >GQLHX?V<ie>QAJ`;KnIX3
+I3ll2VSFjRC6hoYb`TY:m41
+R4
+!s105 slave_fifo_v_unit
+S1
+R0
+R17
+8../source/slave_fifo.v
+F../source/slave_fifo.v
+L0 5
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 0
+R9
+R1
+vtb1
+R2
+R3
+!i10b 1
+!s100 l>?ZmX6GIcH]OHbd7Lz^82
+I5NVdagHMCcTbQc<J^?aB>0
+R4
+R10
+S1
+R0
+R11
+R12
+R13
+L0 68
+R5
+r1
+!s85 0
+31
+R14
+R15
+R16
+!i113 0
+R9
+R1

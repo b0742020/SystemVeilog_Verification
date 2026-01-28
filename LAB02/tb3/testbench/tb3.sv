@@ -47,22 +47,22 @@ class chnl_initiator;
     @(posedge intf.clk);
     // USER TODO 1.1
     // Please use the clocking drv_ck of chnl_intf to drive data
-    intf.ch_valid <= 1;
-    intf.ch_data <= t.data;
+    intf.drv_ck.ch_valid <= 1;
+    intf.drv_ck.ch_data <= t.data;
     wait(intf.ch_ready === 'b1);
     $display("%t channel initiator [%s] sent data %x", $time, name, t.data);
     // USER TODO 1.2
     // Apply variable idle_cycles and decide how many idle cycles to be
     // inserted between two sequential data
-    chnl_idle();
+    repeat(this.idle_cycles) chnl_idle();
   endtask
   
   task chnl_idle();
     @(posedge intf.clk);
     // USER TODO 1.1
     // Please use the clocking drv_ck of chnl_intf to drive data
-    intf.ch_valid <= 0;
-    intf.ch_data <= 0;
+    intf.drv_ck.ch_valid <= 0;
+    intf.drv_ck.ch_data <= 0;
   endtask
 endclass
 
@@ -76,9 +76,9 @@ class chnl_generator;
   function new(int n);
     this.id = n;
     this.num = 0;
-    t = new();
   endfunction
   function chnl_trans get_trans();
+    t = new();
     t.data = 'h00C0_0000 + (this.id<<16) + this.num;
     t.id = this.id;
     t.num = this.num;
@@ -144,12 +144,23 @@ module tb3;
   initial begin 
     // USER TODO 3.1
     // instantiate the components chn0/1/2_init chnl0/1/2_gen
-
+    chnl0_init = new("chnl0_init");
+    chnl1_init = new("chnl1_init");
+    chnl2_init = new("chnl2_init");
+    chnl0_gen = new(0);
+    chnl1_gen = new(1);
+    chnl2_gen = new(2);
     // USER TODO 3.2
     // assign the interface handle to each chnl_initiator objects
+    chnl0_init.set_interface(chnl0_if);
+    chnl1_init.set_interface(chnl1_if);
+    chnl2_init.set_interface(chnl2_if);
 
     // USER TODO 3.3
     // START TESTs
+    basic_test();
+    burst_test();
+    fifo_full_test();
     $display("*****************all of tests have been finished********************");
     $finish();
   end

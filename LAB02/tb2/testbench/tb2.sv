@@ -25,21 +25,21 @@ module chnl_initiator(chnl_intf intf);
     @(posedge intf.clk);
     // USER TODO 1.1
     // Please use the clocking drv_ck of chnl_intf to drive data
-    intf.ch_valid <= 1;
-    intf.ch_data <= data;
+    intf.drv_ck.ch_valid <= 1;
+    intf.drv_ck.ch_data <= data;
     wait(intf.ch_ready === 'b1);
     $display("%t channel initiator [%s] sent data %x", $time, name, data);
     // USER TODO 1.2
     // Apply variable idle_cycles and decide how many idle cycles to be
     // inserted between two sequential data
-    chnl_idle();
+    repeat(idle_cycles) chnl_idle();
   endtask
   task automatic chnl_idle();
     @(posedge intf.clk);
     // USER TODO 1.1
     // Please use the clocking drv_ck of chnl_intf to drive data
-    intf.ch_valid <= 0;
-    intf.ch_data <= 0;
+    intf.drv_ck.ch_valid <= 0;
+    intf.drv_ck.ch_data <= 0;
   endtask
 endmodule
 
@@ -135,6 +135,11 @@ module tb2;
       repeat(100) chnl1_init.chnl_write(chnl1_gen.get_data());
       repeat(100) chnl2_init.chnl_write(chnl2_gen.get_data());
     join
+    fork
+      wait(chnl0_init.intf.ch_margin == 'h20);
+      wait(chnl1_init.intf.ch_margin == 'h20);
+      wait(chnl2_init.intf.ch_margin == 'h20);
+    join
     $display("basic_test finished testing DUT");
   endtask
 
@@ -143,6 +148,39 @@ module tb2;
   // each channel send out 500 data
   // then to finish the test
   task automatic burst_test();
+  chnl0_gen.initialize(0);
+  chnl1_gen.initialize(1);
+  chnl2_gen.initialize(2);
+  chnl0_init.set_name("chnl0_init");
+  chnl1_init.set_name("chnl1_init");
+  chnl2_init.set_name("chnl2_init");
+  chnl0_init.set_idle_cycles(0);
+  chnl1_init.set_idle_cycles(0);
+  chnl2_init.set_idle_cycles(0);
+  $display("burst_test initialized components");
+  wait (rstn === 1'b1);
+  repeat(5) @(posedge clk);
+  $display("burst_test started testing DUT");
+  fork
+    begin
+      repeat(500) chnl0_init.chnl_write(chnl0_gen.get_data());
+      chnl0_init.chnl_idle();
+    end
+    begin
+      repeat(500) chnl0_init.chnl_write(chnl0_gen.get_data());
+      chnl1_init.chnl_idle();
+    end
+    begin
+      repeat(500) chnl0_init.chnl_write(chnl0_gen.get_data());
+      chnl2_init.chnl_idle();
+    end
+  join
+  fork
+    wait(chnl0_init.intf.ch_margin == 'h20);
+    wait(chnl1_init.intf.ch_margin == 'h20);
+    wait(chnl2_init.intf.ch_margin == 'h20);
+  join  
+  $display("burst_test finished testing DUT");
   endtask
 
   // USER TODO 2.2
@@ -150,6 +188,50 @@ module tb2;
   // have been reached fifo full state, but not all reaching
   // fifo full at the same time
   task automatic fifo_full_test();
+    chnl0_gen.initialize(0);
+    chnl1_gen.initialize(1);
+    chnl2_gen.initialize(2);
+    chnl0_init.set_name("chnl0_init");
+    chnl1_init.set_name("chnl1_init");
+    chnl2_init.set_name("chnl2_init");
+    chnl0_init.set_idle_cycles(0);
+    chnl1_init.set_idle_cycles(0);
+    chnl2_init.set_idle_cycles(0);
+    $display("FIFO_FULL_TEST finished testing DUT");
+    fork:fork_all_run
+      forever chnl0_init.chnl_write(chnl0_gen.get_data());
+	    forever chnl1_init.chnl_write(chnl1_gen.get_data());
+	    forever chnl2_init.chnl_write(chnl2_gen.get_data());
+    join_none
+    $display("fifo_full_test: 3 initiators running now");
+
+    $display("fifo_full_test: waiting 3 channel fifos to be full");
+    fork
+      wait(chnl0_init.intf.ch_margin == 0);
+      wait(chnl1_init.intf.ch_margin == 0);
+      wait(chnl2_init.intf.ch_margin == 0);
+    join
+    $display("fifo_full_test: 3 channel fifos have reached full");
+
+    $display("fifo_full_test: stop 3 initiators running");
+    disable fork_all_run;
+    $display("fifo_full_test: set and ensure all agents' initiator are idle state");
+    fork
+      chnl0_init.chnl_idle();
+      chnl1_init.chnl_idle();
+      chnl2_init.chnl_idle();
+    join
+
+    $display("fifo_full_test waiting DUT transfering all of data");
+    fork
+      wait(chnl0_init.intf.ch_margin == 'h20);
+      wait(chnl1_init.intf.ch_margin == 'h20);
+      wait(chnl2_init.intf.ch_margin == 'h20);
+    join
+    $display("fifo_full_test: 3 channel fifos have transferred all data");
+
+    $display("fifo_full_test finished testing DUT");
+
   endtask
   
   chnl_intf chnl0_if(.*);

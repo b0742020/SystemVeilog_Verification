@@ -30,7 +30,7 @@ module chnl_initiator(chnl_intf intf);
     // Please use the clocking drv_ck of chnl_intf to drive data
     intf.drv_ck.ch_valid <= 1;
     intf.drv_ck.ch_data <= data;
-    wait(intf.drv_ck.ch_ready === 'b1);
+    wait(intf.ch_ready === 'b1);
     $display("%t channel initiator [%s] sent data %x", $time, name, data);
     // USER TODO 1.2
     // Apply variable idle_cycles and decide how many idle cycles to be

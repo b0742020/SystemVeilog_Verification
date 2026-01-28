@@ -1,0 +1,187 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dE:/Proj/LAB02/tb2/sim
+T_opt
+!s110 1769524038
+VV<1L<kaNSe6W^]72Jhh^^2
+04 3 4 work tb2 fast 0
+=1-1c8341ca9720-6978cb46-1ad-4e60
+o-quiet -auto_acc_if_foreign -work work -L work +acc
+Z1 tCvgOpt 0
+n@_opt
+OL;O;10.6c;65
+varbiter
+Z2 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z3 !s110 1769524037
+!i10b 1
+!s100 KfVDaVdSjhGe5AnYCi_lL3
+Ic6f6gzAc5[1VSMcS:BOlV0
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+!s105 arbiter_v_unit
+S1
+R0
+w1768227542
+8../source/arbiter.v
+F../source/arbiter.v
+L0 5
+Z5 OL;L;10.6c;65
+r1
+!s85 0
+31
+Z6 !s108 1769524037.000000
+Z7 !s107 ../source/slave_fifo.v|../source/mcdt.v|../source/arbiter.v|
+Z8 !s90 -reportprogress|300|-sv|-f|rtl_v.f|
+!i113 0
+Z9 o-sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+vchnl_generator
+R2
+R3
+!i10b 1
+!s100 aZ=<:1[`k]hd>hFH[a5BU3
+IPOIa9jGJFgLTTMN4`f]oa0
+R4
+Z10 !s105 tb2_sv_unit
+S1
+R0
+Z11 w1769524034
+Z12 8../testbench/tb2.sv
+Z13 F../testbench/tb2.sv
+L0 46
+R5
+r1
+!s85 0
+31
+R6
+Z14 !s107 ../testbench/tb2.sv|
+Z15 !s90 -reportprogress|300|-sv|-f|rtl_sv.f|
+!i113 0
+R9
+R1
+vchnl_initiator
+R2
+R3
+!i10b 1
+!s100 `i5?X6gFOTHmY6<AO_`9>0
+IA<m`7fn@_60J2Bjng:SfL1
+R4
+R10
+S1
+R0
+R11
+R12
+R13
+L0 15
+R5
+r1
+!s85 0
+31
+R6
+R14
+R15
+!i113 0
+R9
+R1
+Ychnl_intf
+R2
+R3
+!i10b 1
+!s100 nf85GKmd>4M4NgM=kB9[k1
+IkIPOkGX34Dz1abXCPhKN72
+R4
+R10
+S1
+R0
+R11
+R12
+R13
+L0 3
+R5
+r1
+!s85 0
+31
+R6
+R14
+R15
+!i113 0
+R9
+R1
+vmcdt
+R2
+R3
+!i10b 1
+!s100 j_5LGf[Gk=46f?LE>]XJH3
+IHzdmiLXEcnnRYRE>S`cff0
+R4
+!s105 mcdt_v_unit
+S1
+R0
+Z16 w1745167494
+8../source/mcdt.v
+F../source/mcdt.v
+L0 5
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 0
+R9
+R1
+vslave_fifo
+R2
+R3
+!i10b 1
+!s100 >GQLHX?V<ie>QAJ`;KnIX3
+I3ll2VSFjRC6hoYb`TY:m41
+R4
+!s105 slave_fifo_v_unit
+S1
+R0
+R16
+8../source/slave_fifo.v
+F../source/slave_fifo.v
+L0 5
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 0
+R9
+R1
+vtb2
+R2
+R3
+!i10b 1
+!s100 GH^jL8CMH`KRQR0EVfZ6:3
+IO3ATjcRzfb;2R3^eSj4^40
+R4
+R10
+S1
+R0
+R11
+R12
+R13
+L0 63
+R5
+r1
+!s85 0
+31
+R6
+R14
+R15
+!i113 0
+R9
+R1
