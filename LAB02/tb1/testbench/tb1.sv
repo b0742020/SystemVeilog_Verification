@@ -158,6 +158,6 @@ module tb1;
   chnl_generator chnl0_gen();
   chnl_generator chnl1_gen();
   chnl_generator chnl2_gen();
-
+  
 endmodule
 

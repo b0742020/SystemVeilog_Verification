@@ -162,9 +162,9 @@ module tb3_ref;
     // START TESTs
     $display("*****************all of tests have been finished********************");
     basic_test();
-	burst_test();
-	fifo_full_test();
-	$finish();
+	  burst_test();
+	  fifo_full_test();
+	  $finish();
   end
 
   // each channel send data with idle_cycles inside [1:3]

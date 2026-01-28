@@ -136,7 +136,7 @@ module tb2_ref;
       repeat(100) chnl1_init.chnl_write(chnl1_gen.get_data());
       repeat(100) chnl2_init.chnl_write(chnl2_gen.get_data());
     join
-	fork
+	  fork
       wait(chnl0_init.intf.ch_margin == 'h20);
       wait(chnl1_init.intf.ch_margin == 'h20);
       wait(chnl2_init.intf.ch_margin == 'h20);
